@@ -61,6 +61,8 @@ EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 EOF
 
+#Image building
+#Don't forget the .ssh/authorized_keys before the build phase
 sudo -i <<EOF
 docker image build -t docker-slave .
 EOF
