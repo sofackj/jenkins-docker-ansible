@@ -17,13 +17,16 @@ RUN dnf update -y && \
     echo "jenkins:password" | chpasswd && \
     mkdir /home/jenkins/.m2 && \
     ssh-keygen -A
+
 # Copy authorized keys
 COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
 
+# Setup ownership for jenkins user
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
 
 # Standard SSH port
 EXPOSE 22
+
 # Start ssh service
 CMD ["/usr/sbin/sshd", "-D"]
