@@ -16,6 +16,7 @@ RUN dnf update -y && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:password" | chpasswd && \
     mkdir /home/jenkins/.m2 && \
+    rm -rf /run/nologin/ && \
     ssh-keygen -A
 
 # Copy authorized keys
