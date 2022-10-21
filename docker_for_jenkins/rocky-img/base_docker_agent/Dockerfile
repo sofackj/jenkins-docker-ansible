@@ -12,7 +12,7 @@ RUN dnf update -y && \
 # Cleanup old packages
     dnf -qy autoremove && \
 # Add user jenkins to the image
-    useradd jenkins && \
+    useradd -d /home/jenkins -m jenkins && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:password" | chpasswd && \
     mkdir /home/jenkins/.m2 && \
