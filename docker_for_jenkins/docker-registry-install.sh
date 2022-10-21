@@ -28,7 +28,7 @@ cd software-install/
 # Build docker image
 for dockerfile in rocky ubuntu alpine
 do
-    docker build -t $dockerfile-agent docker_for_jenkins/$dockerfile-img/base_docker_agent/
+    docker build -t $dockerfile-agent docker_for_jenkins/$dockerfile-img/
     docker tag $dockerfile-agent localhost:5000/$dockerfile-agent:latest
     docker push localhost:5000/$dockerfile-agent:latest
     docker rmi $dockerfile-agent localhost:5000/$dockerfile-agent:latest
