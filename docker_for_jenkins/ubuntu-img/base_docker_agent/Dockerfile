@@ -12,7 +12,7 @@ RUN apt-get update && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Add user jenkins to the image
-    adduser -d /home/jenkins -m jenkins && \
+    useradd -d /home/jenkins -m jenkins && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:password" | chpasswd && \
     mkdir /home/jenkins/.m2
