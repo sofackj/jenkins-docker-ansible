@@ -42,3 +42,32 @@ docker build -t [image-name] [ubuntu/rocky/alpine]-img/
 ### Configure Jenkins to add your container as an agent
 
 [Currently working on the next part]
+
+## Build a docker container from a pipeline
+- Build a container and use command in it
+```sh
+// Filter node with the label docker
+node('docker') {
+    // Assigne a container to a variable
+    def httpd = docker.image('httpd:alpine')
+    // Interact inside the container
+    httpd.inside {
+    // For example, check the OS version of the container
+    sh "cat /etc/*release*"
+  }
+}
+```
+- Build a container and use command in it
+```sh
+node('docker') {
+  docker.image('httpd:alpine').withRun('-p 8081:80') {c ->
+    sh "curl -i http://localhost:8081/"
+    IP_DOCKER = sh (
+        script: "docker inspect --format='{{.NetworkSettings.Networks.bridge.IPAddress}}' ${c.id}",
+        returnStdout: true
+    ).trim()
+    echo IP_DOCKER
+    sh "ping -c 3 ${IP_DOCKER}"
+  }
+}
+```
