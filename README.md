@@ -31,6 +31,10 @@ curl localhost:4243/version
 {"Platform":{"Name":"Docker Engine - Community"},"Components":[{"Name":"Engine","Version":"20.10.19","Details":{"ApiVersion":"1.41",...
 ```
 
+## Setup a configuration as code (casc) jenkins container
+
+Thanks to [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code) for the general procedure and [jdstamp](https://github.com/jdstamp/ccmb-jenkins) and [ultrabright](https://github.com/ultrabright/docker-jenkins) for further informations and debugs !!
+
 ## Setup docker container as agent for Jenkins
 
 ### Build image for jenkins agent (rocky linux, ubuntu and alpine)
@@ -42,3 +46,32 @@ docker build -t [image-name] [ubuntu/rocky/alpine]-img/
 ### Configure Jenkins to add your container as an agent
 
 [Currently working on the next part]
+
+## Build a docker container from a pipeline
+- Build a container and use command in it
+```sh
+// Filter node with the label docker
+node('docker') {
+    // Assigne a container to a variable
+    def httpd = docker.image('httpd:alpine')
+    // Interact inside the container
+    httpd.inside {
+    // For example, check the OS version of the container
+    sh "cat /etc/*release*"
+  }
+}
+```
+- Build a container and use command in it
+```sh
+node('docker') {
+  docker.image('httpd:alpine').withRun('-p 8081:80') {c ->
+    sh "curl -i http://localhost:8081/"
+    IP_DOCKER = sh (
+        script: "docker inspect --format='{{.NetworkSettings.Networks.bridge.IPAddress}}' ${c.id}",
+        returnStdout: true
+    ).trim()
+    echo IP_DOCKER
+    sh "ping -c 3 ${IP_DOCKER}"
+  }
+}
+```
