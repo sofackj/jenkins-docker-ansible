@@ -31,6 +31,10 @@ curl localhost:4243/version
 {"Platform":{"Name":"Docker Engine - Community"},"Components":[{"Name":"Engine","Version":"20.10.19","Details":{"ApiVersion":"1.41",...
 ```
 
+## Setup a configuration as code (casc) jenkins container
+
+Thanks to [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code) for the general procedure and [jdstamp](https://github.com/jdstamp/ccmb-jenkins) and [ultrabright](https://github.com/ultrabright/docker-jenkins) for further informations and debugs !!
+
 ## Setup docker container as agent for Jenkins
 
 ### Build image for jenkins agent (rocky linux, ubuntu and alpine)
