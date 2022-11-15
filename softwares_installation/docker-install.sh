@@ -14,7 +14,7 @@ dnf install -y tree wget
 dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 #Installation of Docker community edition (not engine)
-dnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+dnf -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin --allowerasing
 
 #Enabling the docker service (Docker service already started)
 systemctl --now enable docker
