@@ -3,7 +3,7 @@ FROM alpine:3.7
 
 # on ajoute openssh pour la connexion ssh
 # et openjdk qui est requis par jenkins
-RUN apk add openssh openjdk11-jre-base
+RUN apk add openssh openjdk8-jre-base
 
 # on ajoute git pour accéder au repo
 RUN apk add git
