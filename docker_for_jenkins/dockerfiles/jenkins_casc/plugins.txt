@@ -11,6 +11,8 @@ gradle:latest
 ldap:latest
 mailer:latest
 matrix-auth:latest
+mina-sshd-api-common:latest
+mina-sshd-api-core:latest
 pam-auth:latest
 pipeline-github-lib:latest
 pipeline-stage-view:latest

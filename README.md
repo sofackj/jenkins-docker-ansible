@@ -35,6 +35,28 @@ curl localhost:4243/version
 
 Thanks to [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code) for the general procedure and [jdstamp](https://github.com/jdstamp/ccmb-jenkins) and [ultrabright](https://github.com/ultrabright/docker-jenkins) for further informations and debugs !!
 
+### Steps to run the image
+
+- Create a volume
+
+```sh
+docker volume create jenkins_volume
+```
+
+- Run the container
+
+```sh
+docker run \
+-d \
+--rm \
+--restart always \
+--name my-jenkins
+-p 8085:8080 \
+-p 50000:50000 \
+-v jenkins_volume:/var/jenkins_home \
+my-jenkins
+```
+
 ## Setup docker container as agent for Jenkins
 
 ### Build image for jenkins agent (rocky linux, ubuntu and alpine)
