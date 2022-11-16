@@ -4,14 +4,17 @@ jenkins:
       allowsSignup: false
       users:
        - id: ${JENKINS_ADMIN_ID}
-         password: ${JENKINS_ADMIN_PASSWORD}
+         password: ${JENKINS_ADMIN_PASSWD}
   
   nodes:
   - permanent:
+      # Setup the node docker
       labelString: "docker linux rocky"
       launcher:
         ssh:
           credentialsId: "docker-host"
+          # Using jenkins in docker the node should always be this one
+          # Not if there is a remote server with docker
           host: "172.17.0.1"
           port: 22
           sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
@@ -20,18 +23,20 @@ jenkins:
       retentionStrategy: "always"
 
 unclassified:
+  # Setup english as language whatever the browser language
   locale:
     ignoreAcceptLanguage: true
     systemLocale: "english"
   location:
     adminAddress: "sofa.kreutz@yahoo.fr"
     url: "http://localhost:8088/"
-
+# Credentials
 credentials:
   system:
     domainCredentials:
     - credentials:
       - usernamePassword:
+          # Credentials for the node docker
           description: "docker node"
           id: "docker-host"
           password: ${DOCKER_NODE_PASSWD}
