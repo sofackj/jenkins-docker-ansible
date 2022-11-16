@@ -35,6 +35,8 @@ curl localhost:4243/version
 
 Thanks to [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code) for the general procedure and [jdstamp](https://github.com/jdstamp/ccmb-jenkins) and [ultrabright](https://github.com/ultrabright/docker-jenkins) for further informations and debugs !!
 
+For more details about the casc.yml file, check the website [here](https://verifa.io/blog/getting-started-with-jenkins-config-as-code/index.html)
+
 ### Steps to run the image
 
 - Build the image

@@ -5,6 +5,19 @@ jenkins:
       users:
        - id: ${JENKINS_ADMIN_ID}
          password: ${JENKINS_ADMIN_PASSWORD}
+  
+  nodes:
+  - permanent:
+      labelString: "docker linux rocky"
+      launcher:
+        ssh:
+          credentialsId: "docker-host"
+          host: "172.17.0.1"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "docker-host"
+      remoteFS: "/home/devops/jenkins_dir"
+      retentionStrategy: "always"
 
 unclassified:
   locale:
@@ -13,3 +26,14 @@ unclassified:
   location:
     adminAddress: "sofa.kreutz@yahoo.fr"
     url: "http://localhost:8088/"
+
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          description: "docker node"
+          id: "docker-host"
+          password: "{AQAAABAAAAAQ2S23B4xX9ymMjwE08mr8HFjfMpSNtwAPSRxJb7TU2+M=}"
+          scope: GLOBAL
+          username: "devops"
