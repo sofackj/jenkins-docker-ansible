@@ -1,3 +1,4 @@
+ansible:latest
 ant:latest
 antisamy-markup-formatter:latest
 blueocean:latest
@@ -6,6 +7,7 @@ cloudbees-folder:latest
 configuration-as-code:latest
 credentials-binding:latest
 docker-build-step:latest
+docker-pipeline:latest
 docker-plugin:latest
 email-ext:latest
 git:latest
