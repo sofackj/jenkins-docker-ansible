@@ -37,6 +37,13 @@ Thanks to [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to
 
 ### Steps to run the image
 
+- Build the image
+
+```sh
+docker build -t my-jenkins \
+docker_for_jenkins/dockerfiles/jenkins_casc/
+```
+
 - Create a volume
 
 ```sh
@@ -50,19 +57,21 @@ docker run \
 -d \
 --rm \
 --restart always \
---name my-jenkins
+--name my-jenkins \
 -p 8085:8080 \
 -p 50000:50000 \
 -v jenkins_volume:/var/jenkins_home \
 my-jenkins
 ```
 
+Everything should be ready at the address : ```<IP docker host>:8085```
+
 ## Setup docker container as agent for Jenkins
 
 ### Build image for jenkins agent (rocky linux, ubuntu and alpine)
 ```sh
 # in/the/github/repository
-docker build -t [image-name] [ubuntu/rocky/alpine]-img/
+docker build -t [image-name] [ubuntu/rocky]-img/
 ```
 
 ### Configure Jenkins to add your container as an agent

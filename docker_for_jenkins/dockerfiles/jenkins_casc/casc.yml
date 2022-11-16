@@ -5,6 +5,11 @@ jenkins:
       users:
        - id: ${JENKINS_ADMIN_ID}
          password: ${JENKINS_ADMIN_PASSWORD}
+
 unclassified:
+  locale:
+    ignoreAcceptLanguage: true
+    systemLocale: "english"
   location:
-    url: http://localhost:8080/
+    adminAddress: "sofa.kreutz@yahoo.fr"
+    url: "http://localhost:8088/"
