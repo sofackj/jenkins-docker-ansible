@@ -4,7 +4,7 @@ jenkins:
       allowsSignup: false
       users:
        - id: ${JENKINS_ADMIN_ID}
-         password: ${JENKINS_ADMIN_PASSWORD}
+         password: ${JENKINS_ADMIN_ID}
   
   nodes:
   - permanent:
