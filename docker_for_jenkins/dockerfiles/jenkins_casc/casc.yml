@@ -4,7 +4,7 @@ jenkins:
       allowsSignup: false
       users:
        - id: ${JENKINS_ADMIN_ID}
-         password: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
   
   nodes:
   - permanent:
@@ -16,7 +16,7 @@ jenkins:
           port: 22
           sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
       name: "docker-host"
-      remoteFS: "/home/devops/jenkins_dir"
+      remoteFS: "/home/${DOCKER_NODE_USER}/jenkins_dir"
       retentionStrategy: "always"
 
 unclassified:
@@ -34,6 +34,6 @@ credentials:
       - usernamePassword:
           description: "docker node"
           id: "docker-host"
-          password: "{AQAAABAAAAAQ2S23B4xX9ymMjwE08mr8HFjfMpSNtwAPSRxJb7TU2+M=}"
+          password: ${DOCKER_NODE_PASSWD}
           scope: GLOBAL
-          username: "devops"
+          username: ${DOCKER_NODE_USER}
