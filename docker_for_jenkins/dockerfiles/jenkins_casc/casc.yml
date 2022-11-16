@@ -5,11 +5,11 @@ jenkins:
       users:
        - id: ${JENKINS_ADMIN_ID}
          password: ${JENKINS_ADMIN_PASSWD}
-  
+  # Setup the nodes for pipelines
   nodes:
   - permanent:
       # Setup the node docker
-      labelString: "docker linux rocky"
+      labelString: "docker-host linux rocky"
       launcher:
         ssh:
           credentialsId: "docker-host"
@@ -21,6 +21,32 @@ jenkins:
       name: "docker-host"
       remoteFS: "/home/${DOCKER_NODE_USER}/jenkins_dir"
       retentionStrategy: "always"
+  # Setup the cloud docker
+  clouds:
+  - docker:
+      containerCap: 3
+      dockerApi:
+        connectTimeout: 60
+        dockerHost:
+          uri: "tcp://172.17.0.1:4243"
+        readTimeout: 60
+      name: "docker"
+      templates:
+      - connector:
+          ssh:
+            sshKeyStrategy:
+              manuallyConfiguredSSHKey:
+                credentialsId: "agent-credentials"
+                sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "rocky-agent:latest"
+        labelString: "docker-agent container rocky linux"
+        name: "docker-agent"
+        pullStrategy: PULL_NEVER
+        pullTimeout: 300
+        remoteFs: "/home/jenkins"
 
 unclassified:
   # Setup english as language whatever the browser language
@@ -42,3 +68,9 @@ credentials:
           password: ${DOCKER_NODE_PASSWD}
           scope: GLOBAL
           username: ${DOCKER_NODE_USER}
+      - usernamePassword:
+          description: "rocky agent"
+          id: "agent-credentials"
+          password: "${ROCKY_AGENT_PASSWD}"
+          scope: GLOBAL
+          username: "${ROCKY_AGENT_USER}"
