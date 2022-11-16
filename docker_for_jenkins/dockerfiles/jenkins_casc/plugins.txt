@@ -8,6 +8,7 @@ configuration-as-code:latest
 credentials-binding:latest
 docker-build-step:latest
 docker-plugin:latest
+docker-workflow:latest
 email-ext:latest
 git:latest
 github-branch-source:latest
