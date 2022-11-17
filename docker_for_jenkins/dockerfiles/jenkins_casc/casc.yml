@@ -15,7 +15,7 @@ jenkins:
           credentialsId: "docker-host"
           # Using jenkins in docker the node should always be this one
           # Not if there is a remote server with docker
-          host: "172.17.0.1"
+          host: ${DOCKER_HOST_IP}
           port: 22
           sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
       name: "docker-host"
@@ -28,7 +28,7 @@ jenkins:
       dockerApi:
         connectTimeout: 60
         dockerHost:
-          uri: "tcp://172.17.0.1:4243"
+          uri: "tcp://${DOCKER_HOST_IP}:4243"
         readTimeout: 60
       name: "docker"
       templates:
@@ -47,7 +47,7 @@ jenkins:
         pullStrategy: PULL_NEVER
         pullTimeout: 300
         remoteFs: "/home/jenkins"
-
+# Variety of settings
 unclassified:
   # Setup english as language whatever the browser language
   locale:
@@ -64,13 +64,13 @@ credentials:
       - usernamePassword:
           # Credentials for the node docker
           description: "docker node"
-          id: "docker-host"
+          id: "docker-host-credentials"
           password: ${DOCKER_NODE_PASSWD}
           scope: GLOBAL
           username: ${DOCKER_NODE_USER}
       - usernamePassword:
           description: "rocky agent"
           id: "agent-credentials"
-          password: "${ROCKY_AGENT_PASSWD}"
+          password: "${AGENT_PASSWD}"
           scope: GLOBAL
-          username: "${ROCKY_AGENT_USER}"
+          username: "${AGENT_USER}"
