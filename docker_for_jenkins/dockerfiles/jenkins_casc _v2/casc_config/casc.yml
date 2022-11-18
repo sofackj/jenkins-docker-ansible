@@ -96,4 +96,4 @@ credentials:
           username: "${AGENT_USER}"
 # specify the seedjob groovy script that will create the  pipelines for us
 jobs:
-  - file: /usr/local/seedjobmy-job.groovy
+  - file: /usr/local/seedjob.groovy
