@@ -18,6 +18,9 @@ jenkins:
         - "Job/Workspace:guest"
         - "Run/Replay:guest"
         - "Run/Update:guest"
+  # make sure our jenkins master has 1 executor
+  # so that we can run our pipelines
+  numExecutors: 1
   disableRememberMe: true
   markupFormatter:
     rawHtml:
@@ -26,7 +29,7 @@ jenkins:
   nodes:
   - permanent:
       # Setup the node docker
-      labelString: "dockerNost linux rocky"
+      labelString: "dockerHost linux rocky"
       launcher:
         ssh:
           credentialsId: "docker-host-credentials"
@@ -91,3 +94,6 @@ credentials:
           password: "${AGENT_PASSWD}"
           scope: GLOBAL
           username: "${AGENT_USER}"
+# specify the seedjob groovy script that will create the  pipelines for us
+jobs:
+  - file: /usr/local/seedjobmy-job.groovy
