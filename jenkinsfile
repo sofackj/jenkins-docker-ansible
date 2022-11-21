@@ -10,6 +10,12 @@ node(){
             ])
         }
     }
+    stage("Clean outside new directories"){
+        sh "find . ! -name two ! -name ".*" | xargs rm -rf"
+        sh "pwd"
+        sh "ls"
+        sh "tree"
+    }
     // stage ('Build and Deployment') {
     //     def ANSIBLE_IMG = docker.build (
     //         "my-ansible",
@@ -20,10 +26,6 @@ node(){
     //         sh "ls"
     //     }
     // }
-    stage("Where am I"){
-        sh "pwd"
-        sh "ls"
-    }
     stage("first"){
         echo "Hello World !!!"
     }
