@@ -30,11 +30,11 @@ node(){
                 submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
             ])
-            ansiblePlaybook (
                 dir ("${ANSIBLE_DIR}") {
-                    playbook: "${ANSIBLE_PLAYBOOK}"
+                    ansiblePlaybook (
+                        playbook: "${ANSIBLE_PLAYBOOK}"
+                    )  
                 }
-            )
         }
     }
     stage("first"){
