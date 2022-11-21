@@ -19,7 +19,7 @@ node(){
         }
     }
     stage("Where am I"){
-        sh "tree"
+        sh "ls"
     }
     stage("first"){
         echo "Hello World !!!"
