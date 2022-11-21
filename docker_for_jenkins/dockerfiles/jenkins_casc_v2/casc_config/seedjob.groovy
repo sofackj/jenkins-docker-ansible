@@ -10,6 +10,10 @@ pipelines.each {
 
 def create_pipeline(String name) {
     pipelineJob(name) {
+        parameters {
+            booleanParam('FLAG', true)
+            choiceParam('OPTION', ['option 1 (default)', 'option 2', 'option 3'])
+        }
         definition {
             cpsScm {
                 scm {
