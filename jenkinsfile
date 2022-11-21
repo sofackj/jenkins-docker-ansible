@@ -32,8 +32,5 @@ node(){
 }
 
 def clean_useless(){
-    sh "find . ! -name *_project ! -name '.*' | xargs rm -rf"
-    sh "pwd"
-    sh "ls"
-    sh "tree"
+    sh "pwd && find . ! -name *_project ! -name '.*' | xargs rm -rf"
 }
