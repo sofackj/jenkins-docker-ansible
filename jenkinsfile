@@ -19,10 +19,6 @@ node(){
             ])
         }
     }
-    stage("Clean workspace besides new directories"){
-        // clean_useless("*_project")
-        sh "ls"
-    }
     stage ('Environment variables') {
         env.ANSIBLE_DIR = "ansible_project/ansible/ansible_volumes/host_interaction"
         env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
@@ -32,7 +28,6 @@ node(){
             "my-ansible",
             "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
             )
-        sh 'rm -rf build_project'
         ANSIBLE_IMG.inside ('-u root') {
             dir ("${ANSIBLE_DIR}") {
                 ansiblePlaybook (
