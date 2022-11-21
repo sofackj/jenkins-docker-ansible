@@ -10,17 +10,17 @@ jenkins:
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "Overall/Administer:${JENKINS_ADMIN_ID}"
-        - "Overall/Read:authenticated"
-        - "Job/Build:guest"
-        - "Job/Cancel:guest"
-        - "Job/Read:guest"
-        - "Job/Workspace:guest"
-        - "Run/Replay:guest"
-        - "Run/Update:guest"
+        - "USER:Overall/Administer:${JENKINS_ADMIN_ID}"
+        - "GROUP:Overall/Read:authenticated"
+        - "USER:Job/Build:guest"
+        - "USER:Job/Cancel:guest"
+        - "USER:Job/Read:guest"
+        - "USER:Job/Workspace:guest"
+        - "USER:Run/Replay:guest"
+        - "USER:Run/Update:guest"
   # make sure our jenkins master has 1 executor
   # so that we can run our pipelines
-  numExecutors: 1
+  numExecutors: 0
   disableRememberMe: true
   markupFormatter:
     rawHtml:
@@ -41,6 +41,7 @@ jenkins:
       name: "docker-host"
       remoteFS: "/home/${DOCKER_NODE_USER}/jenkins_dir"
       retentionStrategy: "always"
+      numExecutors: 3
   # Setup the cloud docker
   clouds:
   - docker:
@@ -74,7 +75,7 @@ unclassified:
     ignoreAcceptLanguage: true
     systemLocale: "english"
   location:
-    adminAddress: "sofa.kreutz@yahoo.fr"
+    adminAddress: "myemail@ok.com"
     url: "http://localhost:8088/"
 # Credentials
 credentials:
