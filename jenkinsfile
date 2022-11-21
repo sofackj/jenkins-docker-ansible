@@ -26,6 +26,7 @@ node(){
                 submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
             ])
+            sh "ls"
         }
     }
     stage("first"){
