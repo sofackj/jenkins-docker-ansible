@@ -22,6 +22,7 @@ node(){
     // }
     stage("Where am I"){
         sh "pwd"
+        sh "ls"
     }
     stage("first"){
         echo "Hello World !!!"
