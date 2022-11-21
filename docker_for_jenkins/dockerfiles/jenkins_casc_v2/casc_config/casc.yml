@@ -97,9 +97,9 @@ credentials:
       - usernamePassword:
           description: "my-github"
           id: "my-git-credentials"
-          password: "${GITHUB_USER}"
+          password: "${GITHUB_TOKEN}"
           scope: GLOBAL
-          username: "${GITHUB_TOKEN}"
+          username: "${GITHUB_USER}"
 # specify the seedjob groovy script that will create the  pipelines for us
 jobs:
   - file: /usr/local/seedjob.groovy
