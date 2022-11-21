@@ -1,6 +1,6 @@
 node(){
     stage('init'){
-        dir("docker-build"){
+        dir("build_project"){
             checkout([$class: 'GitSCM',
                 branches: [[name: '*/dev']],
                 doGenerateSubmoduleConfigurations: false,
@@ -11,7 +11,7 @@ node(){
         }
     }
     stage("Clean outside new directories"){
-        sh "find . ! -name docker-build ! -name '.*' | xargs rm -rf"
+        sh "find . ! -name *_project ! -name '.*' | xargs rm -rf"
         sh "pwd"
         sh "ls"
         sh "tree"
