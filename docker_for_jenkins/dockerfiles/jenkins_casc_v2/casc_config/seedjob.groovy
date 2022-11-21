@@ -13,14 +13,17 @@ def create_pipeline(String name) {
         definition {
             cpsScm {
                 scm {
-                    branch('*/dev')
-                    remote {
-                        url('https://github.com/sofackj/jenkins-docker-ansible.git')
-                        credentials('my-git-credentials')
+                    git {
+                        branch('*/dev')
+                        remote {
+                            url('https://github.com/sofackj/jenkins-docker-ansible.git')
+                            credentials('my-git-credentials')
+                        }
+                        extensions {
+                            cleanAfterCheckout()
+                        }
                     }
-                    extensions {
-                        cleanAfterCheckout()
-                    }
+                    
                 }
                 scriptPath("jenkinsfile")
             }
