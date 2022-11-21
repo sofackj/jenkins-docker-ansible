@@ -11,20 +11,18 @@ pipelines.each {
 def create_pipeline(String name) {
     pipelineJob(name) {
         definition {
-            cps {
-                sandbox(true)
-                script(
-                    """
-node(){
-    stage("first"){
-        echo "Hello World !!!"
-    }
-    stage("second"){
-        echo "Bye World !!!"
-    }
-}
-                    """
-                )
+            cpsScm {
+                scm {
+                    remote {
+                        url('https://github.com/sofackj/jenkins-docker-ansible.git')
+                        branch('*/dev')
+                        credentials('my-git-credentials')
+                    }
+                    extensions {
+                        cleanAfterCheckout()
+                    }
+                }
+                scriptPath("jenkinsfile")
             }
         }
     }
