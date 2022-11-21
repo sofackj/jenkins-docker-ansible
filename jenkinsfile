@@ -11,7 +11,7 @@ node(){
         }
     }
     stage("Clean outside new directories"){
-        sh "find . ! -name two ! -name ".*" | xargs rm -rf"
+        sh "find . ! -name two ! -name '.*' | xargs rm -rf"
         sh "pwd"
         sh "ls"
         sh "tree"
