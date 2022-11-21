@@ -3,14 +3,14 @@ jenkins:
     local:
       allowsSignup: false
       users:
-       - id: ${JENKINS_ADMIN_ID}
-         password: ${JENKINS_ADMIN_PASSWD}
+       - id: admin
+         password: admin
        - id: guest
          password: guest
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "Overall/Administer:${JENKINS_ADMIN_ID}"
+        - "Overall/Administer:admin"
         - "Overall/Read:authenticated"
         - "Job/Build:guest"
         - "Job/Cancel:guest"
@@ -22,48 +22,6 @@ jenkins:
   markupFormatter:
     rawHtml:
       disableSyntaxHighlighting: false
-  # Setup the nodes for pipelines
-  nodes:
-  - permanent:
-      # Setup the node docker
-      labelString: "dockerNost linux rocky"
-      launcher:
-        ssh:
-          credentialsId: "docker-host-credentials"
-          # Using jenkins in docker the node should always be this one
-          # Not if there is a remote server with docker
-          host: ${DOCKER_HOST_IP}
-          port: 22
-          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
-      name: "docker-host"
-      remoteFS: "/home/${DOCKER_NODE_USER}/jenkins_dir"
-      retentionStrategy: "always"
-  # Setup the cloud docker
-  clouds:
-  - docker:
-      containerCap: 3
-      dockerApi:
-        connectTimeout: 60
-        dockerHost:
-          uri: "tcp://${DOCKER_HOST_IP}:4243"
-        readTimeout: 60
-      name: "docker"
-      templates:
-      - connector:
-          ssh:
-            sshKeyStrategy:
-              manuallyConfiguredSSHKey:
-                credentialsId: "agent-credentials"
-                sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
-        dockerTemplateBase:
-          cpuPeriod: 0
-          cpuQuota: 0
-          image: "rocky-agent:latest"
-        labelString: "dockerAgent container rocky linux"
-        name: "docker-agent"
-        pullStrategy: PULL_NEVER
-        pullTimeout: 300
-        remoteFs: "/home/jenkins"
 # Variety of settings
 unclassified:
   # Setup english as language whatever the browser language
@@ -71,23 +29,5 @@ unclassified:
     ignoreAcceptLanguage: true
     systemLocale: "english"
   location:
-    adminAddress: "sofa.kreutz@yahoo.fr"
+    adminAddress: "myemail@address.com"
     url: "http://localhost:8088/"
-# Credentials
-credentials:
-  system:
-    domainCredentials:
-    - credentials:
-      - usernamePassword:
-          # Credentials for the node docker
-          description: "docker node"
-          id: "docker-host-credentials"
-          password: ${DOCKER_NODE_PASSWD}
-          scope: GLOBAL
-          username: ${DOCKER_NODE_USER}
-      - usernamePassword:
-          description: "rocky agent"
-          id: "agent-credentials"
-          password: "${AGENT_PASSWD}"
-          scope: GLOBAL
-          username: "${AGENT_USER}"
