@@ -44,5 +44,5 @@ node(){
     }
 }
 def clean_useless(to_keep){
-    sh "pwd && find . ! -name '$to_keep' ! -name '.*' -maxdepth 1 | xargs rm -rf"
+    sh "tree && pwd && find . ! -name '$to_keep' ! -name '.*' -maxdepth 1 | xargs rm -rf && ls"
 }
