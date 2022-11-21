@@ -37,7 +37,7 @@ Thanks to [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to
 
 For more details about the casc.yml file, check the website [here](https://verifa.io/blog/getting-started-with-jenkins-config-as-code/index.html)
 
-### Steps to run the image
+### V1 - Steps to run the image
 
 - Build the image
 
@@ -63,6 +63,40 @@ docker run \
 -p 8085:8080 \
 -p 50000:50000 \
 -v jenkins_volume:/var/jenkins_home \
+my-jenkins
+```
+
+Everything should be ready at the address : ```<IP docker host>:8085```
+
+### V2 - Steps to run the image
+
+- Build the image
+
+```sh
+docker build -t my-jenkins \
+docker_for_jenkins/dockerfiles/jenkins_casc_v2/
+```
+
+- Create a volume
+
+```sh
+docker volume create jenkins_volume
+```
+
+- Run the container
+
+```sh
+docker run \
+-d \
+--rm \
+--restart always \
+--name my-jenkins \
+-p 8085:8080 \
+-p 50000:50000 \
+--env-file $(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/.env
+-v jenkins_volume:/var/jenkins_home \
+--mount type=bind,source=$(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/casc.yml:/var/jenkins_home/casc.yml
+--mount type=bind,source=$(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/seedjob.groovy:/usr/local/seedjob.groovy
 my-jenkins
 ```
 
