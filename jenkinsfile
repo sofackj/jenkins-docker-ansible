@@ -23,7 +23,6 @@ node(){
         clean_useless("*_project")
     }
     stage ('Environment variables') {
-        
         env.ANSIBLE_DIR = "ansible_project/ansible/ansible_volumes/host_interaction"
         env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
     }
@@ -44,7 +43,6 @@ node(){
         cleanWs()
     }
 }
-
 def clean_useless(to_keep){
     sh "pwd && find . ! -name $to_keep ! -name '.*' -maxdepth 1 | xargs rm -rf"
 }
