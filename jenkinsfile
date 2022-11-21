@@ -11,7 +11,7 @@ node(){
         }
     }
     stage("Clean outside new directories"){
-        clean_useless()
+        clean_useless("*_project")
     }
     // stage ('Build and Deployment') {
     //     def ANSIBLE_IMG = docker.build (
