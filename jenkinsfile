@@ -1,7 +1,7 @@
 node(){
     stage('init'){
         checkout([$class: 'GitSCM',
-        branches: [[name: '*/test']],
+        branches: [[name: '*/dev']],
         doGenerateSubmoduleConfigurations: false,
         extensions: [[$class: 'CleanCheckout']],
         submoduleCfg: [],
@@ -15,6 +15,7 @@ node(){
             )
         ANSIBLE_IMG.inside ('-u root') {
             sh "ansible --version"
+            sh "tree"
         }
     }
     stage("Where am I"){
