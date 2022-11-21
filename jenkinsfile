@@ -23,14 +23,15 @@ node(){
         clean_useless("*_project")
     }
     stage ('Environment variables') {
-        env.ANSIBLE_IMG = docker.build (
-            "my-ansible",
-            "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
-            )
+        
         env.ANSIBLE_DIR = "ansible_project/ansible/ansible_volumes/host_interaction"
         env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
     }
     stage ('Build and Deployment') {
+        env.ANSIBLE_IMG = docker.build (
+            "my-ansible",
+            "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
+            )
         ANSIBLE_IMG.inside ('-u root') {
             dir ("${ANSIBLE_DIR}") {
                 ansiblePlaybook (
