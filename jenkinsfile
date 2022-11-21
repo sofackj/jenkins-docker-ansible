@@ -1,3 +1,8 @@
+def ANSIBLE_IMG = docker.build (
+    "my-ansible",
+    "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
+    )
+
 node(){
     stage('Import repositories'){
         dir("build_project"){
@@ -19,7 +24,7 @@ node(){
             ])
         }
     }
-    stage("Clean outside new directories"){
+    stage("Clean workspace besides new directories"){
         clean_useless("*_project")
     }
     stage ('Environment variables') {
@@ -27,10 +32,6 @@ node(){
         env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
     }
     stage ('Build and Deployment') {
-        def ANSIBLE_IMG = docker.build (
-            "my-ansible",
-            "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
-            )
         ANSIBLE_IMG.inside ('-u root') {
             dir ("${ANSIBLE_DIR}") {
                 ansiblePlaybook (
