@@ -15,11 +15,11 @@ node(){
             )
         ANSIBLE_IMG.inside ('-u root') {
             sh "ansible --version"
-            sh "tree"
+            sh "ls"
         }
     }
     stage("Where am I"){
-        sh "ls"
+        sh "tree"
     }
     stage("first"){
         echo "Hello World !!!"
