@@ -9,20 +9,18 @@ pipelines.each {
 }
 
 def create_pipeline(String name) {
-    pipelineJob(name) {
+    pipelineJob('job-dsl-plugin') {
         definition {
             cpsScm {
                 scm {
-                    remote {
-                        url('https://github.com/sofackj/jenkins-docker-ansible.git')
-                        branch('*/dev')
-                        credentials('my-git-credentials')
-                    }
-                    extensions {
-                        cleanAfterCheckout()
+                    git {
+                        remote {
+                            url('https://github.com/jenkinsci/job-dsl-plugin.git')
+                        }
+                        branch('*/master')
                     }
                 }
-                scriptPath("jenkinsfile")
+                lightweight()
             }
         }
     }
