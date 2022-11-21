@@ -11,10 +11,7 @@ node(){
         }
     }
     stage("Clean outside new directories"){
-        sh "find . ! -name *_project ! -name '.*' | xargs rm -rf"
-        sh "pwd"
-        sh "ls"
-        sh "tree"
+        clean_useless()
     }
     // stage ('Build and Deployment') {
     //     def ANSIBLE_IMG = docker.build (
@@ -32,4 +29,11 @@ node(){
     stage("second"){
         echo "Bye World !!!"
     }
+}
+
+def clean_useless(){
+    sh "find . ! -name *_project ! -name '.*' | xargs rm -rf"
+    sh "pwd"
+    sh "ls"
+    sh "tree"
 }
