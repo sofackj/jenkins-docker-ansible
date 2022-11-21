@@ -12,18 +12,17 @@ node(){
     }
     stage("Clean outside new directories"){
         clean_useless("*_project")
-        sh "tree"
     }
-    // stage ('Build and Deployment') {
-    //     def ANSIBLE_IMG = docker.build (
-    //         "my-ansible",
-    //         "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
-    //         )
-    //     ANSIBLE_IMG.inside ('-u root') {
-    //         sh "ansible --version"
-    //         sh "ls"
-    //     }
-    // }
+    stage ('Build and Deployment') {
+        def ANSIBLE_IMG = docker.build (
+            "my-ansible",
+            "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
+            )
+        ANSIBLE_IMG.inside ('-u root') {
+            sh "ansible --version"
+            sh "ls"
+        }
+    }
     stage("first"){
         echo "Hello World !!!"
     }
@@ -33,5 +32,5 @@ node(){
 }
 
 def clean_useless(to_keep){
-    sh "pwd && find . ! -name $to_keep ! -name '.*' | xargs rm -rf"
+    sh "pwd && find . ! -name $to_keep ! -name '.*' -maxdepth 1 | xargs rm -rf"
 }
