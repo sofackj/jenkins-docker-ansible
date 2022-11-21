@@ -28,7 +28,7 @@ node(){
         env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
     }
     stage ('Build and Deployment') {
-        env.ANSIBLE_IMG = docker.build (
+        def ANSIBLE_IMG = docker.build (
             "my-ansible",
             "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
             )
