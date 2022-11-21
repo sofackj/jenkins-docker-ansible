@@ -37,11 +37,8 @@ node(){
                 }
         }
     }
-    stage("first"){
-        echo "Hello World !!!"
-    }
-    stage("second"){
-        echo "Bye World !!!"
+    stage("Cleanup"){
+        cleanWs()
     }
 }
 
