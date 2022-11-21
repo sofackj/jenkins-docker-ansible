@@ -1,4 +1,4 @@
-node(){
+node("dockerHost"){
     stage('Import repositories'){
         dir("build_project"){
             checkout([$class: 'GitSCM',
