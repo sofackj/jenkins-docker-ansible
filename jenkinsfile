@@ -20,7 +20,8 @@ node(){
         }
     }
     stage("Clean workspace besides new directories"){
-        clean_useless("*_project")
+        // clean_useless("*_project")
+        sh "ls"
     }
     stage ('Environment variables') {
         env.ANSIBLE_DIR = "ansible_project/ansible/ansible_volumes/host_interaction"
