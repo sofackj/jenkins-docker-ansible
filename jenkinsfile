@@ -32,7 +32,7 @@ node(){
             "my-ansible",
             "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
             )
-        sh 'rm build_project'
+        sh 'rm -rf build_project'
         ANSIBLE_IMG.inside ('-u root') {
             dir ("${ANSIBLE_DIR}") {
                 ansiblePlaybook (
