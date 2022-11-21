@@ -1,5 +1,5 @@
 node(){
-    stage('init'){
+    stage('Import repositories'){
         dir("build_project"){
             checkout([$class: 'GitSCM',
                 branches: [[name: '*/dev']],
@@ -9,12 +9,21 @@ node(){
                 userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/jenkins-docker-ansible.git']]
             ])
         }
+        dir("ansible_project"){
+            checkout([$class: 'GitSCM',
+                branches: [[name: '*/dev']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'CleanCheckout']],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
+            ])
+        }
     }
     stage("Clean outside new directories"){
         clean_useless("*_project")
     }
     stage ('Environment variables') {
-        env.ANSIBLE_DIR = "ansible/ansible_volumes/host_interaction"
+        env.ANSIBLE_DIR = "ansible_project/ansible/ansible_volumes/host_interaction"
         env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
     }
     stage ('Build and Deployment') {
@@ -23,18 +32,11 @@ node(){
             "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
             )
         ANSIBLE_IMG.inside ('-u root') {
-            checkout([$class: 'GitSCM',
-                branches: [[name: '*/dev']],
-                doGenerateSubmoduleConfigurations: false,
-                extensions: [[$class: 'CleanCheckout']],
-                submoduleCfg: [],
-                userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
-            ])
-                dir ("${ANSIBLE_DIR}") {
-                    ansiblePlaybook (
-                        playbook: "${ANSIBLE_PLAYBOOK}"
-                    )  
-                }
+            dir ("${ANSIBLE_DIR}") {
+                ansiblePlaybook (
+                    playbook: "${ANSIBLE_PLAYBOOK}"
+                )  
+            }
         }
     }
     stage("Cleanup"){
