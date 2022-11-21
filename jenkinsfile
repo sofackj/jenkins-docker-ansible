@@ -8,6 +8,15 @@ node(){
         userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/jenkins-docker-ansible.git']]
         ])
     }
+    stage ('Build and Deployment') {
+        def ANSIBLE_IMG = docker.build (
+            "my-ansible",
+            "./docker_for_jenkins/dockerfiles/ansible_controller/"
+            )
+        ANSIBLE_IMG.inside ('-u root') {
+            sh "ansible --version"
+        }
+    }
     stage("Where am I"){
         sh "tree"
     }
