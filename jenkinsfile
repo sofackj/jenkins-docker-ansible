@@ -14,10 +14,12 @@ node(){
             "./docker_for_jenkins/dockerfiles/ansible_controller/"
             )
         ANSIBLE_IMG.inside ('-u root') {
-            stage "one"
-            sh "ansible --version"
-            stage "two"
-            sh "ls"
+            stage ("one"){
+                sh "ansible --version"
+            }
+            stage ("two"){
+                sh "ls"
+            }
         }
     }
     stage("Where am I"){
