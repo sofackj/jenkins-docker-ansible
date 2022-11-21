@@ -13,21 +13,29 @@ node(){
     stage("Clean outside new directories"){
         clean_useless("*_project")
     }
+    stage ('Environment variables') {
+        env.ANSIBLE_DIR = "ansible/ansible_volumes/host_interaction"
+        env.ANSIBLE_PLAYBOOK = "host-int-playbook.yml"
+    }
     stage ('Build and Deployment') {
         def ANSIBLE_IMG = docker.build (
-            "test-ansible",
+            "my-ansible",
             "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
             )
-        // ANSIBLE_IMG.inside ('-u root') {
-        //     checkout([$class: 'GitSCM',
-        //         branches: [[name: '*/dev']],
-        //         doGenerateSubmoduleConfigurations: false,
-        //         extensions: [[$class: 'CleanCheckout']],
-        //         submoduleCfg: [],
-        //         userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
-        //     ])
-        //     sh "ls"
-        // }
+        ANSIBLE_IMG.inside ('-u root') {
+            checkout([$class: 'GitSCM',
+                branches: [[name: '*/dev']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'CleanCheckout']],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
+            ])
+            ansiblePlaybook (
+                dir ("${ANSIBLE_DIR}") {
+                    playbook: "${ANSIBLE_PLAYBOOK}"
+                }
+            )
+        }
     }
     stage("first"){
         echo "Hello World !!!"
