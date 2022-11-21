@@ -31,6 +31,6 @@ node(){
     }
 }
 
-def clean_useless(){
-    sh "pwd && find . ! -name *_project ! -name '.*' | xargs rm -rf"
+def clean_useless(to_keep){
+    sh "pwd && find . ! -name $to_keep ! -name '.*' | xargs rm -rf"
 }
