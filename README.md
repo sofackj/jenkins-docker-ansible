@@ -80,7 +80,14 @@ docker_for_jenkins/dockerfiles/jenkins_casc_v2/
 - Create a volume
 
 ```sh
-docker volume create jenkins_volume
+docker volume create jenkins
+```
+
+- Setup your credentials following the template ```docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/.env_template```
+
+```sh
+# Create a .env file listed in .gitignore and edit it with your secrets
+vim .env
 ```
 
 - Run the container
@@ -88,15 +95,14 @@ docker volume create jenkins_volume
 ```sh
 docker run \
 -d \
---rm \
 --restart always \
 --name my-jenkins \
 -p 8085:8080 \
 -p 50000:50000 \
---env-file $(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/.env
--v jenkins_volume:/var/jenkins_home \
---mount type=bind,source=$(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/casc.yml:/var/jenkins_home/casc.yml
---mount type=bind,source=$(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/seedjob.groovy:/usr/local/seedjob.groovy
+--env-file .env \
+-v jenkins:/var/jenkins_home \
+--mount type=bind,source=$(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/casc.yml,target=/var/jenkins_home/casc.yml \
+--mount type=bind,source=$(pwd)/docker_for_jenkins/dockerfiles/jenkins_casc_v2/casc_config/seedjob.groovy,target=/usr/local/seedjob.groovy \
 my-jenkins
 ```
 
