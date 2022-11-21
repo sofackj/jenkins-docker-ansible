@@ -1,15 +1,5 @@
-// // create an array with our two pipelines
-// pipelines = ["first-test"]
-
-// // iterate through the array and call the create_pipeline method
-// pipelines.each {
-//     pipeline ->
-//     println "Creating pipeline ${pipeline}"
-//     create_pipeline(pipeline)
-// }
-
-// def create_pipeline(String name) {
-pipelineJob("name") {
+// Pipeline ready to use after first login
+pipelineJob("my-pipeline") {
     parameters {
         booleanParam('FLAG', true)
         choiceParam('OPTION', ['option 1 (default)', 'option 2', 'option 3'])
@@ -32,4 +22,3 @@ pipelineJob("name") {
         }
     }
 }
-// }
