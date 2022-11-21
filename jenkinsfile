@@ -15,19 +15,19 @@ node(){
     }
     stage ('Build and Deployment') {
         def ANSIBLE_IMG = docker.build (
-            "my-ansible",
+            "test-ansible",
             "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
             )
-        ANSIBLE_IMG.inside ('-u root') {
-            checkout([$class: 'GitSCM',
-                branches: [[name: '*/dev']],
-                doGenerateSubmoduleConfigurations: false,
-                extensions: [[$class: 'CleanCheckout']],
-                submoduleCfg: [],
-                userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
-            ])
-            sh "ls"
-        }
+        // ANSIBLE_IMG.inside ('-u root') {
+        //     checkout([$class: 'GitSCM',
+        //         branches: [[name: '*/dev']],
+        //         doGenerateSubmoduleConfigurations: false,
+        //         extensions: [[$class: 'CleanCheckout']],
+        //         submoduleCfg: [],
+        //         userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/docker-for-projects.git']]
+        //     ])
+        //     sh "ls"
+        // }
     }
     stage("first"){
         echo "Hello World !!!"
