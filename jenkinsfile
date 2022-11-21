@@ -1,0 +1,20 @@
+node(){
+    stage('init'){
+        checkout([$class: 'GitSCM',
+        branches: [[name: '*/test']],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [[$class: 'CleanCheckout']],
+        submoduleCfg: [],
+        userRemoteConfigs: [[credentialsId: 'my-git-credentials', url: 'https://github.com/sofackj/jenkins-docker-ansible.git']]
+        ])
+    }
+    stage("Where am I"){
+        sh "tree"
+    }
+    stage("first"){
+        echo "Hello World !!!"
+    }
+    stage("second"){
+        echo "Bye World !!!"
+    }
+}
