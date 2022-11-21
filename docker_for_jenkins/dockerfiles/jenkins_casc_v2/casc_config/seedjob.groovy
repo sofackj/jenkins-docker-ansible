@@ -21,7 +21,6 @@ pipelineJob("name") {
                     branch('*/dev')
                     remote {
                         url('https://github.com/sofackj/jenkins-docker-ansible.git')
-                        credentials('my-git-credentials')
                     }
                     extensions {
                         cleanAfterCheckout()
