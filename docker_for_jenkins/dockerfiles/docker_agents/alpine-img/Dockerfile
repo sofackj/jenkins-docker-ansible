@@ -28,7 +28,7 @@ RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 RUN adduser -D jenkins
 
 # auquel on ajoute un mot de passe
-RUN echo "jenkins:password" | chpasswd
+RUN echo "jenkins:jenkins" | chpasswd
 
 # et on crée un répertoire pour ranger le bazard jenkins
 RUN mkdir /home/jenkins/jenkins_slave
