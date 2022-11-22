@@ -40,6 +40,3 @@ node("dockerHost"){
         cleanWs()
     }
 }
-def clean_useless(to_keep){
-    sh "tree && pwd && find . ! -name '$to_keep' ! -name '.*' -maxdepth 1 | xargs rm -rf && ls"
-}
