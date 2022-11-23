@@ -13,11 +13,11 @@ services:
       source: jenkins-volume
       target: /var/jenkins_home
     - type: bind
-        source: $PWD/jenkins_casc/casc_config/casc.yml
-        target: /var/jenkins_home/casc.yml
+      source: $PWD/jenkins_casc/casc_config/casc.yml
+      target: /var/jenkins_home/casc.yml
     - type: bind
-        source: $PWD/jenkins_casc/casc_config/seedjob.groovy
-        target: /usr/local/seedjob.groovy
+      source: $PWD/jenkins_casc/casc_config/seedjob.groovy
+      target: /usr/local/seedjob.groovy
     environment:
     - JENKINS_ADMIN_ID=${JENKINS_ADMIN_ID}
     - JENKINS_ADMIN_PASSWD=${JENKINS_ADMIN_PASSWD}
