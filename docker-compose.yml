@@ -6,18 +6,18 @@ services:
     image: my-jenkins
     container_name: jenkins
     ports:
-      - "50000:50000"
-      - "8085:8080"
+    - "50000:50000"
+    - "8085:8080"
     volumes:
-      - type: volume
-          source: jenkins-volume
-          target: /var/jenkins_home
-      - type: bind
-          source: $PWD/jenkins_casc/casc_config/casc.yml
-          target: /var/jenkins_home/casc.yml
-      - type: bind
-          source: $PWD/jenkins_casc/casc_config/seedjob.groovy
-          target: /usr/local/seedjob.groovy
+    - type: volume
+      source: jenkins-volume
+      target: /var/jenkins_home
+    - type: bind
+        source: $PWD/jenkins_casc/casc_config/casc.yml
+        target: /var/jenkins_home/casc.yml
+    - type: bind
+        source: $PWD/jenkins_casc/casc_config/seedjob.groovy
+        target: /usr/local/seedjob.groovy
     environment:
     - JENKINS_ADMIN_ID=${JENKINS_ADMIN_ID}
     - JENKINS_ADMIN_PASSWD=${JENKINS_ADMIN_PASSWD}
