@@ -2,8 +2,8 @@ version: '3'
 name: my-project
 services:
   jenkins:
-    # build: jenkins_casc/
-    image: custom-jenkins
+    build: jenkins_casc/
+    image: my-jenkins
     container_name: jenkins
     restart: always
     ports:
@@ -30,15 +30,14 @@ services:
     - GITHUB_USER=${GITHUB_USER}
     - GITHUB_TOKEN=${GITHUB_TOKEN}
   docker:
-    # build: docker_environment/
-    image: custom-docker
+    build: docker_environment/
+    image: my-docker
     container_name: docker
     volumes:
     - type: bind
       source: /var/run/docker.sock
       target: /var/run/docker.sock
   registry:
-    # build: docker_environment/
     image: registry:2
     container_name: registry
     restart: always
