@@ -1,9 +1,10 @@
-version: '3.1'
-
+version: '3'
+name: my-project
 services:
   jenkins:
     # build: jenkins_casc/
     image: my-jenkins
+    container_name: jenkins
     ports:
       - "50000:50000"
       - "8085:8080"
