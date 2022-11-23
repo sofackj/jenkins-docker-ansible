@@ -26,7 +26,7 @@ node("dockerHost"){
     stage ('Build and Deployment') {
         def ANSIBLE_IMG = docker.build (
             "my-ansible",
-            "./build_project/docker_for_jenkins/dockerfiles/ansible_controller/"
+            "./build_project/dockerfiles/ansible_controller/"
             )
         ANSIBLE_IMG.inside ('-u root') {
             dir ("${ANSIBLE_DIR}") {
