@@ -3,7 +3,7 @@ name: my-project
 services:
   jenkins:
     # build: jenkins_casc/
-    image: my-jenkins
+    image: custom-jenkins
     container_name: jenkins
     ports:
     - "50000:50000"
@@ -28,6 +28,14 @@ services:
     - AGENT_PASSWD=${AGENT_PASSWD}
     - GITHUB_USER=${GITHUB_USER}
     - GITHUB_TOKEN=${GITHUB_TOKEN}
+  docker:
+    # build: docker_environment/
+    image: custom-docker
+    container_name: docker
+    volumes:
+    - type: volume
+      source: /var/run/docker.sock
+      target: /var/run/docker.sock
 
 volumes:
   jenkins-volume:
