@@ -16,8 +16,7 @@ services:
           target: /var/jenkins_home/casc.yml
       - type: bind
           source: $PWD/jenkins_casc/casc_config/seedjob.groovy
-          target: /var/jenkins_home/seedjob.groovy
+          target: /usr/local/seedjob.groovy
 
 volumes:
   jenkins-volume:
-    external: false
