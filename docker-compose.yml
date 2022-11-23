@@ -34,7 +34,7 @@ services:
     image: custom-docker
     container_name: docker
     volumes:
-    - type: volume
+    - type: bind
       source: /var/run/docker.sock
       target: /var/run/docker.sock
   registry:
