@@ -37,7 +37,7 @@ services:
     - type: volume
       source: /var/run/docker.sock
       target: /var/run/docker.sock
-  docker:
+  registry:
     # build: docker_environment/
     image: registry:2
     container_name: registry
