@@ -1,4 +1,49 @@
-// Pipelines ready to use after first login
+// xample of pipelines ready to use after first login
+// Initiate Project B
+pipelineJob("init-system") {
+        definition {
+            cps {
+                sandbox(true)
+                script("""
+node('jenkins') {
+    stage("Ping Docker Host"){
+        try {
+            timeout(time: 10, unit: 'SECONDS') {
+                node('dockerHost'){
+                    echo "Status Docker Host => OK"
+            }
+            }
+        } catch(err) {
+            error("Status Docker Host => DOWN")
+        }
+    }
+}
+                """)
+        }
+    }
+}
+// How to use trigger
+pipelineJob("test-trigger") {
+        definition {
+            cps {
+                sandbox(true)
+                script("""
+node('dockerHost') {
+    stage("test trigger"){
+        echo "Hello World"
+    }
+}
+                """)
+        }
+        triggers {
+        buildResult() {
+            combinedJobs()
+            triggerInfo('init-system', BuildResult.SUCCESS)
+        }
+    }
+    }
+}
+// Example to use later on
 pipelineJob("my-pipeline") {
     parameters {
         booleanParam('FLAG', true)
@@ -22,26 +67,4 @@ pipelineJob("my-pipeline") {
         }
     }
 }
-//
-pipelineJob("init-system") {
-        definition {
-            cps {
-                sandbox(true)
-                script("""
-node('jenkins') {
-    stage("Ping Docker Host"){
-        try {
-            timeout(time: 10, unit: 'SECONDS') {
-                node('dockerHost'){
-                    echo "Status Docker Host => OK"
-            }
-            }
-        } catch(err) {
-            error("Status Docker Host => DOWN")
-        }
-    }
-}
-                """)
-        }
-    }
-}
+
