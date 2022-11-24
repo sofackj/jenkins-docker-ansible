@@ -1,4 +1,4 @@
-// Pipeline ready to use after first login
+// Pipelines ready to use after first login
 pipelineJob("my-pipeline") {
     parameters {
         booleanParam('FLAG', true)
@@ -19,6 +19,29 @@ pipelineJob("my-pipeline") {
                 
             }
             scriptPath("jenkinsfile")
+        }
+    }
+}
+//
+pipelineJob("init-system") {
+        definition {
+            cps {
+                sandbox(true)
+                script("""
+node('jenkins') {
+    stage("Ping Docker Host"){
+        try {
+            timeout(time: 10, unit: 'SECONDS') {
+                node('dockerHost'){
+                    echo "Status Docker Host => OK"
+            }
+            }
+        } catch(err) {
+            error("Status Docker Host => DOWN")
+        }
+    }
+}
+                """)
         }
     }
 }

@@ -20,7 +20,8 @@ jenkins:
         - "USER:Run/Update:guest"
   # make sure our jenkins master has 1 executor
   # so that we can run our pipelines
-  numExecutors: 0
+  numExecutors: 1
+  labelString: "jenkins"
   disableRememberMe: true
   markupFormatter:
     rawHtml:
