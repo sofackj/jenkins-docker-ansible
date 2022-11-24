@@ -23,7 +23,7 @@ node('jenkins') {
     }
 }
 // How to use trigger
-pipelineJob("test-trigger") {
+Job("test-trigger") {
         definition {
             cps {
                 sandbox(true)
@@ -35,12 +35,6 @@ node('dockerHost') {
 }
                 """)
         }
-        triggers {
-        buildResult() {
-            combinedJobs()
-            triggerInfo('init-system', BuildResult.SUCCESS)
-        }
-    }
     }
 }
 // Example to use later on
