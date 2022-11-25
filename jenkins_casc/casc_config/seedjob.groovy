@@ -38,12 +38,14 @@ pipelineJob("test") {
     // }
     configure { project ->
         project / 'properties' / 'hello' {
-            configure { node ->
-                node / 'hello' / 'test' {
-                    'one'('ok')
-                    'two'('ok')
-                }
-            }
+            'one'('ok')
+            'two'('ok')
+        }
+    }
+    configure { project ->
+        project / 'properties' / 'hello' / 'test' {
+            'three'('ok')
+            'four'('ok')
         }
     }
     definition {
