@@ -22,36 +22,20 @@ node('jenkins') {
         }
     }
 }
-// How to use trigger
+// How to use trigger via the configure block
 pipelineJob("test") {
     configure { project ->
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
             'spec'('')
-            'upstreamProjects'('my-pipeline')
+            'upstreamProjects'('init-system')
         }
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
-            'name'('FAILURE')
-            'ordinal'('2')
-            'color'('RED')
+            'name'('Blue')
+            'ordinal'('0')
+            'color'('BLUE')
             'completeBuild'('true')
         }
     }
-    // configure { project ->
-    //     project / 'properties' / 'hello' {
-    //         'one'('ok')
-    //         'two'('ok')
-    //     }
-    //     project / 'properties' / 'hello' / 'test' {
-    //         'three'('ok')
-    //         'four'('ok')
-    //     }
-    // }
-    // configure { project ->
-    //     project / 'properties' / 'hello' / 'test' {
-    //         'three'('ok')
-    //         'four'('ok')
-    //     }
-    // }
     definition {
         cps {
             sandbox(true)
