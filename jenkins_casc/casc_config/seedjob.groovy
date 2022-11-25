@@ -24,6 +24,11 @@ node('jenkins') {
 }
 // How to use trigger
 pipelineJob("test") {
+    configure { project ->
+        project / 'properties' / 'com.example.Test' {
+            'switch'('on')
+        }
+    }
     definition {
         cps {
             sandbox(true)
