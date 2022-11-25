@@ -28,6 +28,11 @@ pipelineJob("test") {
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
             'spec'('')
             'upstreamProjects'('my-pipeline')
+            'threshold'('''
+            <name>SUCCESS</name>
+            <ordinal>0</ordinal>
+            <color>BLUE</color>
+            ''')
         }
     }
     definition {
