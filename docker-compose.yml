@@ -38,16 +38,8 @@ services:
     - type: bind
       source: $PWD/jenkins_casc/casc_config/jobs
       target: /usr/local/jobs
-    # env_file:
-    # - ../.env
-    environment:
-    - EUREKA=/run/secrets/password
-    secrets:
-    - password
+    env_file:
+    - ../.env
 
-secrets:
-  password:
-     external: true
-  
 volumes:
   jenkins-volume:
