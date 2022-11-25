@@ -25,7 +25,7 @@ node('jenkins') {
 // How to use trigger
 pipelineJob("test") {
     configure { project ->
-        project / 'properties' / 'com.example.Test' {
+        project / 'properties' / 'com.example.Test' / 'hello' {
             'switch'('on')
         }
     }
