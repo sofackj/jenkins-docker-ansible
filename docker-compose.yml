@@ -41,7 +41,7 @@ services:
     env_file:
     - ../.env
     environment:
-    - TEST: /run/secrets/env_test
+    - TEST: '/run/secrets/env_test'
 
 secrets:
   env_test:
