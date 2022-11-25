@@ -31,7 +31,7 @@ pipelineJob("test") {
         }
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
             'name'('FAILURE')
-            'ordinal'('my-pipeline')
+            'ordinal'('0')
             'color'('RED')
             'completeBuild'('true')
         }
