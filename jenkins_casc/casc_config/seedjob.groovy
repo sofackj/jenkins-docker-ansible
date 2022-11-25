@@ -1,4 +1,4 @@
-// xample of pipelines ready to use after first login
+// Example of pipelines ready to use after first login
 // Initiate Project B
 pipelineJob("init-system") {
         definition {
@@ -11,7 +11,7 @@ node('jenkins') {
             timeout(time: 10, unit: 'SECONDS') {
                 node('dockerHost'){
                     echo "Status Docker Host => OK"
-            }
+                }
             }
         } catch(err) {
             error("Status Docker Host => DOWN")
@@ -42,7 +42,7 @@ pipelineJob("test") {
             script("""
 node('dockerHost') {
     stage("test trigger"){
-        echo "Hello World"
+        echo "This job has been triggered by init-system"
     }
 }
             """)

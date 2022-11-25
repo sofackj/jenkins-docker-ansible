@@ -104,4 +104,4 @@ credentials:
           username: "${GITHUB_USER}"
 # specify the seedjob groovy script that will create the  pipelines for us
 jobs:
-  - file: /usr/local/seedjob.groovy
+  - file: /usr/local/jobs/seedjob.groovy
