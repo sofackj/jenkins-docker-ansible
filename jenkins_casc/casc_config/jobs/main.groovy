@@ -22,26 +22,6 @@ node('jenkins') {
         }
     }
 }
-// Check containers
-pipelineJob("check-container") {
-        definition {
-            cps {
-                sandbox(true)
-                script("""
-def list_containers = ["registry"]
-def STATUS
-node('dockerHost'){
-    stage('Define variables') {
-    }
-    list_containers.each { container ->
-        stage("Check Status ${container}") {
-            echo "HELLO"
-        }
-    }
-}
-                """)
-        }
-    }
-}
+
 
 
