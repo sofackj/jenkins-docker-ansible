@@ -39,13 +39,11 @@ node('dockerHost'){
         }
         stage("Specs ${container}") {
             def NETWORK = shell_output ("docker inspect -f '{{ .HostConfig.NetworkMode }}' ${container}")
-            echo """
-            STATUS      => ${shell_output ("docker exec registry echo OK")}
-            ID          => ${shell_output ("docker inspect -f '{{ .Id }}' ${container}")}
-            Image       => ${shell_output ("docker inspect -f '{{ .Config.Image }}' ${container}")}
-            Network     => ${shell_output ("docker inspect -f '{{ .HostConfig.NetworkMode }}' ${container}")}
-            IP Address  => ${shell_output ("docker inspect -f '{{ .NetworkSettings.Networks.${NETWORK}.IPAddress }}' ${container}")}
-            """
+            echo "STATUS      => ${shell_output ("docker exec registry echo OK")}"
+            echo "ID          => ${shell_output ("docker inspect -f '{{ .Id }}' ${container}")}"
+            echo "Image       => ${shell_output ("docker inspect -f '{{ .Config.Image }}' ${container}")}"
+            echo "Network     => ${shell_output ("docker inspect -f '{{ .HostConfig.NetworkMode }}' ${container}")}"
+            echo "IP Address  => ${shell_output ("docker inspect -f '{{ .NetworkSettings.Networks.${NETWORK}.IPAddress }}' ${container}")}"
         }
     }
 }
