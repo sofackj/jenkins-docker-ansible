@@ -67,7 +67,6 @@ pipelineJob("my-pipeline") {
                         cleanAfterCheckout()
                     }
                 }
-                
             }
             scriptPath("jenkinsfile")
         }
