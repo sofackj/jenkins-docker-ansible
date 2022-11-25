@@ -29,9 +29,10 @@ pipelineJob("test") {
             'spec'('')
             'upstreamProjects'('my-pipeline')
             'threshold'('''
-            <name>SUCCESS</name>
-            <ordinal>0</ordinal>
-            <color>BLUE</color>
+            <name>FAILURE</name>
+            <ordinal>2</ordinal>
+            <color>RED</color>
+            <completeBuild>true</completeBuild>
             ''')
         }
     }
