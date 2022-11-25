@@ -41,7 +41,7 @@ services:
     env_file:
     - ../.env
     environment:
-    - TEST="Hello"
+    - TEST=${TEST}
   
 volumes:
   jenkins-volume:
