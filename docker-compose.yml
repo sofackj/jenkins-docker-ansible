@@ -40,12 +40,6 @@ services:
       target: /usr/local/jobs
     env_file:
     - ../.env
-    environment:
-    - TEST: '/run/secrets/env_test'
-
-secrets:
-  env_test:
-    file: ../secrets.txt
   
 volumes:
   jenkins-volume:
