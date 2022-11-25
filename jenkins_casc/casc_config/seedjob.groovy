@@ -41,13 +41,17 @@ pipelineJob("test") {
             'one'('ok')
             'two'('ok')
         }
-    }
-    configure { project ->
         project / 'properties' / 'hello' / 'test' {
             'three'('ok')
             'four'('ok')
         }
     }
+    // configure { project ->
+    //     project / 'properties' / 'hello' / 'test' {
+    //         'three'('ok')
+    //         'four'('ok')
+    //     }
+    // }
     definition {
         cps {
             sandbox(true)
