@@ -36,8 +36,8 @@ services:
       source: $PWD/jenkins_casc/casc_config/casc.yml
       target: /var/jenkins_home/casc.yml
     - type: bind
-      source: $PWD/jenkins_casc/casc_config/jobs/seedjob.groovy
-      target: /usr/local/jobs/seedjob.groovy
+      source: $PWD/jenkins_casc/casc_config/jobs
+      target: /usr/local/jobs
     env_file:
     - ../.env
   
