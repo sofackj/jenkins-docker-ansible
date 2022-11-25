@@ -24,16 +24,26 @@ node('jenkins') {
 }
 // How to use trigger
 pipelineJob("test") {
+    // configure { project ->
+    //     project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
+    //         'spec'('')
+    //         'upstreamProjects'('my-pipeline')
+    //         'threshold'('''
+    //         <name>FAILURE</name>
+    //         <ordinal>2</ordinal>
+    //         <color>RED</color>
+    //         <completeBuild>true</completeBuild>
+    //         ''')
+    //     }
+    // }
     configure { project ->
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
-            'spec'('')
-            'upstreamProjects'('my-pipeline')
-            'threshold'('''
-            <name>FAILURE</name>
-            <ordinal>2</ordinal>
-            <color>RED</color>
-            <completeBuild>true</completeBuild>
-            ''')
+        project / 'properties' / 'hello' {
+            configure { node ->
+                node / 'test' {
+                    'one'('ok')
+                    'two'('ok')
+                }
+            }
         }
     }
     definition {
