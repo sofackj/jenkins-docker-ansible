@@ -39,7 +39,7 @@ pipelineJob("test") {
     configure { project ->
         project / 'properties' / 'hello' {
             configure { node ->
-                node / 'test' {
+                node / 'hello' / 'test' {
                     'one'('ok')
                     'two'('ok')
                 }
