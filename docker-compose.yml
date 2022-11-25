@@ -40,6 +40,8 @@ services:
       target: /usr/local/jobs
     env_file:
     - ../.env
+    environment:
+    - TEST=${TEST}
   
 volumes:
   jenkins-volume:
