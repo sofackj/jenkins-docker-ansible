@@ -41,7 +41,11 @@ services:
     env_file:
     - ../.env
     environment:
-    - TEST=${TEST}
+    - TEST: /run/secrets/env_test
+
+secrets:
+  env_test:
+    file: ../secrets.txt
   
 volumes:
   jenkins-volume:
