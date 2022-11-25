@@ -25,8 +25,9 @@ node('jenkins') {
 // How to use trigger
 pipelineJob("test") {
     configure { project ->
-        project / 'properties' / 'com.example.Test' / 'hello' {
-            'switch'('on')
+        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
+            'spec'('')
+            'upstreamProjects'('my-pipeline')
         }
     }
     definition {
