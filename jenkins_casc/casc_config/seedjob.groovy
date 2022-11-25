@@ -23,20 +23,20 @@ node('jenkins') {
     }
 }
 // How to use trigger
-Job("test-trigger") {
-        definition {
-            cps {
-                sandbox(true)
-                script("""
-node('dockerHost') {
-    stage("test trigger"){
-        echo "Hello World"
-    }
-}
-                """)
-        }
-    }
-}
+// Job("test-trigger") {
+//         definition {
+//             cps {
+//                 sandbox(true)
+//                 script("""
+// node('dockerHost') {
+//     stage("test trigger"){
+//         echo "Hello World"
+//     }
+// }
+//                 """)
+//         }
+//     }
+// }
 // Example to use later on
 pipelineJob("my-pipeline") {
     parameters {
