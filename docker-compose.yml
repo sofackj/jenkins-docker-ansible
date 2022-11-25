@@ -40,6 +40,14 @@ services:
       target: /usr/local/jobs
     env_file:
     - ../.env
+    environment:
+    - eureka_password: /run/secrets/password
+    secrets:
+    - password
+
+secrets:
+  password:
+     external: true
   
 volumes:
   jenkins-volume:
