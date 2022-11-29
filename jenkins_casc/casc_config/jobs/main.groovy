@@ -25,7 +25,7 @@ node('jenkins') {
 
 pipelineJob("check") {
     configure { project ->
-        project / 'definition' {
+        project / 'definition' / 'script' {
             'script'('''
             node('nodeHost'){
                 echo "Hello World"
