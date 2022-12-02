@@ -3,7 +3,7 @@ pipelineJob("test") {
     configure { project ->
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
             'spec'('')
-            'upstreamProjects'('init-system')
+            'upstreamProjects'('my-pipeline')
         }
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
             'name'('Blue')
