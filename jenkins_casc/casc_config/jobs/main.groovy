@@ -53,5 +53,4 @@ pipelineJob("Registry-process") {
         }
     }
 }
-}
 
