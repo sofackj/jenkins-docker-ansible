@@ -22,21 +22,36 @@ node('jenkins') {
         }
     }
 }
-
-pipelineJob("check") {
+// How to use trigger via the configure block
+pipelineJob("Registry-process") {
     configure { project ->
-        project / 'definition' / 'script' {
-            'script'('''
-            node('nodeHost'){
-                echo "Hello World"
+        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
+            'spec'('')
+            'upstreamProjects'('init-system')
+        }
+        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
+            'name'('Blue')
+            'ordinal'('0')
+            'color'('BLUE')
+            'completeBuild'('true')
+        }
+    }
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    branch('*/dev')
+                    remote {
+                        url('https://gitlab.com/project-b-its/img-for-infra.git')
+                    }
+                    extensions {
+                        cleanAfterCheckout()
+                    }
+                }
             }
-            ''')
+            scriptPath("Jenkinsfile")
         }
     }
-        definition {
-            cps {
-                sandbox(true)
-        }
-    }
+}
 }
 
