@@ -102,6 +102,12 @@ credentials:
           password: "${GITHUB_TOKEN}"
           scope: GLOBAL
           username: "${GITHUB_USER}"
+      - usernamePassword:
+          description: "gitlab"
+          id: "gitlab-credentials"
+          password: "${GITLAB_TOKEN}"
+          scope: GLOBAL
+          username: "${GITLAB_USER}"
 # specify the seedjob groovy script that will create the  pipelines for us
 jobs:
   - file: /usr/local/jobs/main.groovy
