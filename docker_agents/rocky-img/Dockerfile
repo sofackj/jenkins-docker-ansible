@@ -14,7 +14,7 @@ RUN dnf update -y && \
 # Add user jenkins to the image
     useradd -d /home/jenkins -m jenkins && \
 # Set password for the jenkins user (you may want to alter this).
-    echo "jenkins:password" | chpasswd && \
+    echo "jenkins:jenkins" | chpasswd && \
     mkdir /home/jenkins/.m2 && \
     rm -rf /run/nologin && \
     ssh-keygen -A
