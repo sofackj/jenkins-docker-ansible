@@ -23,7 +23,7 @@ node('jenkins') {
     }
 }
 // How to use trigger via the configure block
-pipelineJob("Registry-process") {
+pipelineJob("registry-process") {
     configure { project ->
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
             'spec'('')
