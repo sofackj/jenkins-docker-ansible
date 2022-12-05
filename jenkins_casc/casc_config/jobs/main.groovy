@@ -6,7 +6,7 @@ pipelineJob("init-system") {
                 sandbox(true)
                 script("""
 node('jenkins') {
-    stage("Ping Docker Host"){
+    stage("Check Docker Host"){
         try {
             timeout(time: 10, unit: 'SECONDS') {
                 node('dockerHost'){
@@ -51,6 +51,46 @@ pipelineJob("registry-process") {
                 }
             }
             scriptPath("Jenkinsfile")
+        }
+    }
+}
+//
+// How to use trigger via the configure block
+pipelineJob("registry-process") {
+    configure { project ->
+        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
+            'spec'('')
+            'upstreamProjects'('init-system')
+        }
+        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
+            'name'('Blue')
+            'ordinal'('0')
+            'color'('BLUE')
+            'completeBuild'('true')
+        }
+    }
+    definition {
+            cps {
+                sandbox(true)
+                script("""
+node ('dockerHost') {
+    stage("Check Agent"){
+        try {
+            timeout(time: 30, unit: 'SECONDS') {
+                node('dockerAgent'){
+                    echo """
+                    Status Docker Agent => OK
+                    """
+                }
+            }
+        } catch(err) {
+            error """
+            Status Docker Agent => DOWN
+            """
+        }
+    }
+}
+                """)
         }
     }
 }
