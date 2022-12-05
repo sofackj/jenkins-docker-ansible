@@ -69,6 +69,35 @@ jenkins:
         pullStrategy: PULL_NEVER
         pullTimeout: 300
         remoteFs: "/home/jenkins"
+  views:
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      jobNames:
+      - "init-system"
+      - "registry-process"
+      name: "check-views"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      jobNames:
+      - "my-pipeline"
+      - "test"
+      name: "examples"
 # Variety of settings
 unclassified:
   # Setup english as language whatever the browser language
