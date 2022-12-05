@@ -70,21 +70,21 @@ jenkins:
         pullTimeout: 300
         remoteFs: "/home/jenkins"
   primaryView:
-    list:
-      columns:
-      - "status"
-      - "weather"
-      - "jobName"
-      - "lastSuccess"
-      - "lastFailure"
-      - "lastDuration"
-      - "buildButton"
-      - "favoriteColumn"
-      jobNames:
-      - "init-system"
-      - "registry-process"
-      - "check-agents"
-      name: "Start process"
+  list:
+    columns:
+    - "status"
+    - "weather"
+    - "jobName"
+    - "lastSuccess"
+    - "lastFailure"
+    - "lastDuration"
+    - "buildButton"
+    - "favoriteColumn"
+    jobNames:
+    - "init-system"
+    - "registry-process"
+    - "check-agents"
+    name: "Start process"
   views:
   list:
       columns:
