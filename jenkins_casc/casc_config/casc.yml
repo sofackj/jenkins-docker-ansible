@@ -69,20 +69,20 @@ jenkins:
         pullStrategy: PULL_NEVER
         pullTimeout: 300
         remoteFs: "/home/jenkins"
-  primaryView:
-  - list:
-      columns:
-      - "status"
-      - "weather"
-      - "jobName"
-      - "lastSuccess"
-      - "lastFailure"
-      - "lastDuration"
-      - "buildButton"
-      - "favoriteColumn"
-      jobNames:
-      - "init-system"
-      name: "start process"
+  # primaryView:
+  # - list:
+  #     columns:
+  #     - "status"
+  #     - "weather"
+  #     - "jobName"
+  #     - "lastSuccess"
+  #     - "lastFailure"
+  #     - "lastDuration"
+  #     - "buildButton"
+  #     - "favoriteColumn"
+  #     jobNames:
+  #     - "init-system"
+  #     name: "start process"
   views:
   - list:
       columns:
