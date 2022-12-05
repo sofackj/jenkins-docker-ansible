@@ -82,9 +82,7 @@ jenkins:
       - "favoriteColumn"
       jobNames:
       - "init-system"
-      - "registry-process"
-      - "check-agents"
-      name: "Start process"
+      name: "start process"
   views:
   list:
       columns:
