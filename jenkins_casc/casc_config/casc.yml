@@ -19,7 +19,7 @@ jenkins:
         - "USER:Run/Replay:guest"
         - "USER:Run/Update:guest"
   # make sure our jenkins master has 1 executor
-  # so that we can run our pipelines
+  # so that we can run our init-system pipeline
   numExecutors: 1
   labelString: "jenkins"
   disableRememberMe: true
@@ -63,12 +63,12 @@ jenkins:
         dockerTemplateBase:
           cpuPeriod: 0
           cpuQuota: 0
-          image: "rocky-agent:latest"
+          image: "localhost:5000/rocky-agent:latest"
         labelString: "dockerAgent container rocky linux"
-        name: "docker-agent"
-        pullStrategy: PULL_NEVER
+        name: "rocky-agent"
         pullTimeout: 300
         remoteFs: "/home/jenkins"
+  # Manage views and setup the default one (primaryView)
   primaryView:
     list:
       columns:
@@ -79,7 +79,6 @@ jenkins:
       - "lastFailure"
       - "lastDuration"
       - "buildButton"
-      - "favoriteColumn"
       jobNames:
       - "init-system"
       name: "start process"
