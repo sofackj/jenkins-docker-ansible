@@ -83,9 +83,10 @@ jenkins:
       jobNames:
       - "init-system"
       - "registry-process"
-      name: "check-views"
+      - "check-agents"
+      name: "Start process"
   views:
-  - list:
+  list:
       columns:
       - "status"
       - "weather"
@@ -97,8 +98,21 @@ jenkins:
       - "favoriteColumn"
       jobNames:
       - "init-system"
+      name: "start process"
+  - list:
+      columns:
+      - "status"
+      - "weather"
+      - "jobName"
+      - "lastSuccess"
+      - "lastFailure"
+      - "lastDuration"
+      - "buildButton"
+      - "favoriteColumn"
+      jobNames:
       - "registry-process"
-      name: "check-views"
+      - "check-agents"
+      name: "triggered jobs"
   - list:
       columns:
       - "status"
@@ -112,7 +126,7 @@ jenkins:
       jobNames:
       - "my-pipeline"
       - "test"
-      name: "examples"
+      name: "few job examples"
 # Variety of settings
 unclassified:
   # Setup english as language whatever the browser language

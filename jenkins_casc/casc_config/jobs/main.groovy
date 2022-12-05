@@ -56,11 +56,11 @@ pipelineJob("registry-process") {
 }
 //
 // How to use trigger via the configure block
-pipelineJob("registry-process") {
+pipelineJob("check-agents") {
     configure { project ->
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
             'spec'('')
-            'upstreamProjects'('init-system')
+            'upstreamProjects'('registry-process')
         }
         project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
             'name'('Blue')
