@@ -70,7 +70,7 @@ jenkins:
         pullTimeout: 300
         remoteFs: "/home/jenkins"
   primaryView:
-  list:
+  - list:
       columns:
       - "status"
       - "weather"
@@ -84,7 +84,7 @@ jenkins:
       - "init-system"
       name: "start process"
   views:
-  list:
+  - list:
       columns:
       - "status"
       - "weather"
