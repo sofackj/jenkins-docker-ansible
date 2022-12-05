@@ -43,6 +43,7 @@ pipelineJob("registry-process") {
                     branch('*/dev')
                     remote {
                         url('https://gitlab.com/project-b-its/img-for-infra.git')
+                        credentials('gitlab-credentials')
                     }
                     extensions {
                         cleanAfterCheckout()
