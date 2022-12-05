@@ -78,15 +78,11 @@ node ('dockerHost') {
         try {
             timeout(time: 30, unit: 'SECONDS') {
                 node('dockerAgent'){
-                    echo """
-                    Status Docker Agent => OK
-                    """
+                    echo "Status Docker Agent => OK"
                 }
             }
         } catch(err) {
-            error """
-            Status Docker Agent => DOWN
-            """
+            error "Status Docker Agent => DOWN"
         }
     }
 }
