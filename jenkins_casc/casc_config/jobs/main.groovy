@@ -76,7 +76,7 @@ pipelineJob("check-agents") {
 node ('dockerHost') {
     stage("Check Agent"){
         try {
-            timeout(time: 30, unit: 'SECONDS') {
+            timeout(time: 120, unit: 'SECONDS') {
                 node('dockerAgent'){
                     echo "Status Docker Agent => OK"
                 }
