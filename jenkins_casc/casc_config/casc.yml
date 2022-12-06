@@ -109,6 +109,7 @@ jenkins:
       jobNames:
       - "registry-process"
       - "check-agents"
+      - "check-ansible"
       name: "triggered jobs"
   - list:
       columns:
