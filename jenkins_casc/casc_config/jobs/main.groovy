@@ -54,7 +54,6 @@ pipelineJob("registry-process") {
         }
     }
 }
-//
 // How to use trigger via the configure block
 pipelineJob("check-agents") {
     configure { project ->
@@ -105,49 +104,20 @@ pipelineJob("check-ansible") {
         }
     }
     definition {
-            cps {
-                sandbox(true)
-                script("""
-// Start the job in the chosen node
-// Here we choose to filter by label 'docker'
-node ('dockerHost') {
-    // Delete the workspace then rebuild it
-    stage ('Clean the worspace') {
-        // Class to delete the workspace direcory
-        cleanWs()
-    }
-    // Import the git repository
-    stage ('Cloning of the repository') {
-        // Git pipeline integrated command
-        git (
-            // Branch of the repository to import
-            branch: 'dev',
-            // Url of the repository
-            url: 'https://gitlab.com/project-b-its/ansible-tests.git'
-            )
-    }
-    // Start the ansible playbook in the Ansible container
-    stage ('Launch of the Playbook') {
-        // Docker pipeline integrated command
-        docker
-        // Name of the image to use
-        .image('localhost:5000/ansible')
-        // Property to do commands inside tha container
-        // Go inside as root to avoid permission errors
-        .inside('-u root --network projectb_default'){
-            // Go to the existing directory (if no directory, it will create one)
-            dir("host_interaction"){
-                // ansiblePlaybook invoke via jenkins
-                ansiblePlaybook(
-                    // Path of the playbook but other options can be added
-                    playbook: "host-int-playbook.yml"
-                )
+        cpsScm {
+            scm {
+                git {
+                    branch('*/dev')
+                    remote {
+                        url('https://gitlab.com/project-b-its/ansible-tests.git')
+                        credentials('gitlab-credentials')
+                    }
+                    extensions {
+                        cleanAfterCheckout()
+                    }
+                }
             }
+            scriptPath("Jenkinsfile")
         }
     }
 }
-                """)
-        }
-    }
-}
-
