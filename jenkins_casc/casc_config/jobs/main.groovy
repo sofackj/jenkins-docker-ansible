@@ -8,7 +8,7 @@ pipelineJob("init-system") {
 node('jenkins') {
     stage("Check Docker Host"){
         try {
-            timeout(time: 10, unit: 'SECONDS') {
+            timeout(time: 120, unit: 'SECONDS') {
                 node('dockerHost'){
                     echo "Status Docker Host => OK"
                 }
@@ -75,7 +75,7 @@ pipelineJob("check-agents") {
 node ('dockerHost') {
     stage("Check Agent"){
         try {
-            timeout(time: 120, unit: 'SECONDS') {
+            timeout(time: 240, unit: 'SECONDS') {
                 node('dockerAgent'){
                     echo "Status Docker Agent => OK"
                 }
