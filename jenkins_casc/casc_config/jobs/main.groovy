@@ -11,7 +11,6 @@ node ('dockerHost') {
             job: "init-system",
             propagate: false,
         )
-        echo "${my_build.result}"
     }
     stage("Setup Registry") {
         def my_build = build (
