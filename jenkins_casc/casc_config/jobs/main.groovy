@@ -8,7 +8,7 @@ pipelineJob("initiation") {
 node ('dockerHost') {
     stage("Check docker node") {
         def my_build = build (
-            job: "init-system",
+            job: "check-node",
             propagate: false,
         )
     }
