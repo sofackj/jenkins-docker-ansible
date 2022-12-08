@@ -108,7 +108,7 @@ jenkins:
       - "favoriteColumn"
       jobNames:
       - "registry-process"
-      - "init-system"
+      - "check-node"
       - "check-agents"
       - "check-ansible"
       name: "triggered jobs"

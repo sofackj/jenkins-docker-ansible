@@ -46,23 +46,19 @@ node ('dockerHost') {
     }
 }
 // Check docker node
-pipelineJob("init-system") {
+pipelineJob("check-node") {
         definition {
             cps {
                 sandbox(true)
                 script("""
-node('jenkins') {
-    stage("Check Docker Host"){
-        try {
-            timeout(time: 120, unit: 'SECONDS') {
-                node('dockerHost'){
-                    echo "Status Docker Host => OK"
-                }
-            }
-        } catch(err) {
-            error("Status Docker Host => DOWN")
+try {
+    timeout(time: 120, unit: 'SECONDS') {
+        node('dockerHost'){
+            echo "Status Docker Host => OK"
         }
     }
+} catch(err) {
+    error("Status Docker Host => DOWN")
 }
                 """)
         }
