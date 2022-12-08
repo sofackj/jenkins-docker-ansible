@@ -18,7 +18,6 @@ node ('dockerHost') {
             job: "registry-process",
             propagate: false,
         )
-        echo "${my_build.result}"
     }
     stage('Check temporary containers') {
         parallel(
@@ -29,7 +28,6 @@ node ('dockerHost') {
                         job: "check-agents",
                         propagate: false,
                     )
-                    echo "${my_build.result}"
                 }
             },
             "ansible controller" :
@@ -39,7 +37,6 @@ node ('dockerHost') {
                         job: "check-ansible",
                         propagate: false,
                     )
-                    echo "${my_build.result}"
                 }
             }
         )
