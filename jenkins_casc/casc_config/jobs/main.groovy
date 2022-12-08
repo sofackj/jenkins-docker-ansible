@@ -1,5 +1,63 @@
 // Example of pipelines ready to use after first login
 // Initiate Project B
+pipelineJob("initiation") {
+        definition {
+            cps {
+                sandbox(true)
+                script("""
+node ('dockerHost') {
+    stage("Check docker node") {
+        def my_build = build (
+            job: "init-system",
+            propagate: false,
+        )
+        echo """
+        ${my_build.result}
+        """
+    }
+    stage("Setup Registry") {
+        def my_build = build (
+            job: "registry-process",
+            propagate: false,
+        )
+        echo """
+        ${my_build.result}
+        """
+    }
+    stage('Check temporary containers') {
+        parallel(
+            "rocky agent" :
+            {
+                stage("rocky agent") {
+                    def my_build = build (
+                        job: "check-agents",
+                        propagate: false,
+                    )
+                    echo """
+                    ${my_build.result}
+                    """
+                }
+            },
+            "ansible controller" :
+            {
+                stage("ansible controller") {
+                    def my_build = build (
+                        job: "check-ansible",
+                        propagate: false,
+                    )
+                    echo """
+                    ${my_build.result}
+                    """
+                }
+            }
+        )
+    }
+}
+                """)
+        }
+    }
+}
+// Check docker node
 pipelineJob("init-system") {
         definition {
             cps {
