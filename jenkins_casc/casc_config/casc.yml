@@ -80,7 +80,7 @@ jenkins:
       - "lastDuration"
       - "buildButton"
       jobNames:
-      - "init-system"
+      - "initiation"
       name: "start process"
   views:
   - list:
@@ -94,7 +94,7 @@ jenkins:
       - "buildButton"
       - "favoriteColumn"
       jobNames:
-      - "init-system"
+      - "initiation"
       name: "start process"
   - list:
       columns:
@@ -108,6 +108,7 @@ jenkins:
       - "favoriteColumn"
       jobNames:
       - "registry-process"
+      - "init-system"
       - "check-agents"
       - "check-ansible"
       name: "triggered jobs"
