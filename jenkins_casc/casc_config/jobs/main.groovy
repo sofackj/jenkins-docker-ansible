@@ -147,3 +147,23 @@ pipelineJob("generate-token") {
         }
     }
 }
+// https://gitlab.com/project-b-its/allow-app-pipelines.git
+pipelineJob("check-status-infra") {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    branch('*/dev')
+                    remote {
+                        url('https://gitlab.com/project-b-its/allow-app-pipelines.git')
+                        credentials('gitlab-credentials')
+                    }
+                    extensions {
+                        cleanAfterCheckout()
+                    }
+                }
+            }
+            scriptPath("Jenkinsfile")
+        }
+    }
+}

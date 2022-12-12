@@ -107,6 +107,7 @@ jenkins:
       - "buildButton"
       - "favoriteColumn"
       jobNames:
+      - "check-status-infra"
       - "registry-process"
       - "check-node"
       - "check-agents"
