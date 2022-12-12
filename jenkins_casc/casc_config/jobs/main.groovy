@@ -163,3 +163,23 @@ pipelineJob("check-ansible") {
         }
     }
 }
+// How to use trigger via the configure block
+pipelineJob("generate-token") {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    branch('*/dev')
+                    remote {
+                        url('https://gitlab.com/project-b-its/api-token-generator.git')
+                        credentials('gitlab-credentials')
+                    }
+                    extensions {
+                        cleanAfterCheckout()
+                    }
+                }
+            }
+            scriptPath("Jenkinsfile")
+        }
+    }
+}

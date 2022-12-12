@@ -111,6 +111,7 @@ jenkins:
       - "check-node"
       - "check-agents"
       - "check-ansible"
+      - "generate-token"
       name: "triggered jobs"
   - list:
       columns:
