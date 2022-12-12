@@ -66,18 +66,6 @@ try {
 }
 // How to use trigger via the configure block
 pipelineJob("registry-process") {
-    configure { project ->
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
-            'spec'('')
-            'upstreamProjects'('init-system')
-        }
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
-            'name'('Blue')
-            'ordinal'('0')
-            'color'('BLUE')
-            'completeBuild'('true')
-        }
-    }
     definition {
         cpsScm {
             scm {
@@ -98,18 +86,6 @@ pipelineJob("registry-process") {
 }
 // How to use trigger via the configure block
 pipelineJob("check-agents") {
-    configure { project ->
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
-            'spec'('')
-            'upstreamProjects'('registry-process')
-        }
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
-            'name'('Blue')
-            'ordinal'('0')
-            'color'('BLUE')
-            'completeBuild'('true')
-        }
-    }
     definition {
             cps {
                 sandbox(true)
@@ -133,18 +109,6 @@ node ('dockerHost') {
 }
 // How to use trigger via the configure block
 pipelineJob("check-ansible") {
-    configure { project ->
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' {
-            'spec'('')
-            'upstreamProjects'('registry-process')
-        }
-        project / 'triggers' / 'jenkins.triggers.ReverseBuildTrigger' / 'threshold' {
-            'name'('Blue')
-            'ordinal'('0')
-            'color'('BLUE')
-            'completeBuild'('true')
-        }
-    }
     definition {
         cpsScm {
             scm {
